@@ -10,8 +10,10 @@
         body{ 
             background: linear-gradient(90deg, rgb(79, 159, 191)  50%, rgb(173, 230, 249) 0);
             background-size: 10px; 
+            overflow-x: hidden;
+            /* reset에 추가할 내용 */
         }
-        .container{ width: 1200px; background-color: antiquewhite; margin: auto; 
+        .container{ width: 1440px; background-color: white; margin: auto; 
             position: relative;
         }
 
@@ -31,7 +33,7 @@
         /* .lnb li{ padding:10px; } */
         .lnb a{ display: block; padding: 10px 0;
                 font-weight: bold;
-                background-image: url( ./images/blit_arrow.png);
+                background-image: url( ./img/blit_arrow.png);
                 background-repeat: no-repeat;
                 background-position: right center;
                 border-bottom:1px solid lightblue;
@@ -73,22 +75,26 @@
                 /* margin-left:20px;
                 list-style-type: disc; */
                 color:black;
-                background-image: url(./images/blit_list.png);
+                background-image: url(./img/blit_list.png);
                 background-repeat: no-repeat;
                 background-position: center left;
                 text-indent: 1em;
         }
         .pbnews-container a{ color:black; }
         .pbevent-container{  font-size: 12px; }
-        .pbevent-container .imgCaption span{ display: block; }
+        /* .pbevent-container .imgCaption span{ display: block; } */
         /* 적용안됨 */
         .follow-list,
         .product-list{ display: flex; gap:10px;
             flex-wrap:wrap;
+            justify-content: center; 
+            /* 추가 */
         }
 
+        .product-list li{ width:calc( (100% - 80px) / 9 );}
         section{ margin: 0 300px 0 250px; 
                background-color:white;
+               padding-bottom: 200px;
         }
 
         .mainBanner img{ width: 100%;  }
@@ -105,7 +111,7 @@
         label[for='search']{ display: inline-block; width:20%;}
         #search{ width: 80%;  height: 30px;
             border-color:burlywood;
-            background-image: url(./images/btn_search.png);
+            background-image: url(./img/btn_search.png);
             background-repeat: no-repeat;
             background-position: right center;
         }
@@ -118,6 +124,27 @@
             font-size: 12px;
             margin-bottom: 20px;
         }
+
+        .information-container, 
+        .service-container{ width: 50%; float:left;
+            padding: 15px;
+        }
+        .information-container>div,
+        .service-container>div{
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+
+        table{ border-collapse: collapse; width:100%;}
+        th, td{ border: 1px solid black; }
+        th:first-child, td:first-child{ border-left:none; }
+        th:last-child, td:last-child{ border-right:none; }
+        tr:nth-child(1) th,
+        tr:nth-child(3) th
+        { background-color: darkblue; color:white;
+            font-size:12px; padding: 5px 0; 
+        }
+        td{ text-align: center; padding: 5px 0; }
         aside{ width:300px;  
             background-color: white;
             position: absolute;  right:0; top:0;
@@ -130,16 +157,58 @@
         aside img{ width:100%; }
         aside>div:hover{  filter:hue-rotate(180deg);}
 
-        footer{ width:1200px; margin: auto;
-            height: 100px; background-color: black;
+        footer{ width:1440px; margin: auto;
+            height: 100px; background-color: white;
+            display: flex;
+            border-top: 1px solid gray;
         }
 
-        @media screen and (max-width:1230px) {
+        .footer-left { width: 250px; border-right: 1px solid gray;
+            display: flex; font-size: 0;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-right{ padding: 15px; font-size: 12px;}
+        .footer-info>ul {
+            display: flex; gap: 20px;
+        }
+        .footer-info li:first-child a{
+            font-weight: bold; color: red;
+        }
+        address{ font-style: normal;}
+        section {border-left: 1px solid gray;
+
+        }
+
+        @media screen and (max-width:1470px) {
             .container{ width:98%; }
             footer{ width:98%; }
+            .information-container h2{  
+                white-space: nowrap;
+            }
+        }
+        @media screen and (max-width:1200px) { 
+            .product-container li{ 
+                width: calc( (100% - 50px) / 6);
+            }
+            .information-container h2{ 
+                width: 43%; 
+                overflow: hidden; 
+            }
         }
         @media screen and (max-width:1000px) {
-            section{ margin: 0  0  0 250px;  }
+            section{ margin: 0  0  20px 250px; padding-bottom: 20px;  }
+            .product-container li{ 
+                width: calc( (100% - 30px) / 4);
+            }
+            .product-container li:nth-child(17) img{ 
+                transform: translateX( -70px );
+                /* item의 각각의 위치 조정 */
+            }
+            .product-container li:nth-child(18) img{ 
+                /* align-self: flex-start; */
+                transform: translateX( -100px );
+            }
             aside{ position: static; margin: 0  0  0 250px;
                 width:auto;  height: auto;
                 display: flex;
@@ -148,9 +217,52 @@
             /*  원래는 정의된 높이가 있다. */
         }
         @media screen and (max-width:600px) {
-            header{ float: none; width:100%; height: 100px;}
+            .container {
+                width: 100%;
+                background : transparent;
+            }
+            header{ float: none; width:100%; height: auto;
+                padding: 0;
+                background-color: transparent;
+            }
+            header h1 {background-color: white; margin-bottom: 0;}
+            h1>img{width:200px;}
+            .lnb {margin-bottom: 0;}
+            .lnb>ul{ display: flex; flex-wrap:wrap; }
+            .lnb>ul>li {width: 33.333333%;}
+            .lnb>ul>li>a{text-align: center;
+                background-image: none;
+            }
+            .tell-container { text-align: center;
+                background-color: white;
+                padding: 20px 0;
+                margin-bottom: 5px;
+            }
+            .follow-container {background-color: white;
+                padding: 20px 0;
+                margin-bottom: 5px;
+            }
+            .follow-container ul{ flex-wrap: nowrap; gap: 0;}
+            .pbnews-container,
+            .pbevent-container { display: none;}
             section{ margin: 0;  }
+
+            .information-container {width: 100%;}
+            .information-container>div {
+                margin-bottom: 20px;
+            }
+            .information-container>div:nth-child(2) {
+                justify-content: center;
+                gap: 30px;
+            }
+            .service-container {width: 100%;}
+
             aside{   margin: 0  ;}
+            
+            footer{width: 100%;}
+            .footer-left{display: none;}
+            .footer-right{text-align: center; width: 100%;}
+            .footer-info>ul{justify-content: center;}
         }
     </style>
 </head>
@@ -227,7 +339,7 @@
                 </div>
             </div>
         </header>
-        <section>
+        <section class="clearFix">
             <div class="mainBanner">
                 <img src="./img/bn_main.png" alt="">
             </div>
@@ -267,6 +379,53 @@
                     <li><a href="#"><img src="./img/list_product_19.png" alt=""></a></li>
                 </ul>
             </div>
+            <!-- product-container end -->
+            <div class="information-container">
+                <div>
+                    <h2>PB Nutition Information</h2>
+                    <div class="more"><img src="./img/btn_more.png" alt=""></div>
+                </div>
+                <div>
+                    <img src="./img/list_product_02.png" alt="">
+                    <p>초콜렛크림치즈브레드</p>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>총중량 <br> (g)</th>
+                            <th>1회 제공량 <br> (g)</th>
+                            <th>1회 칼로리 <br> (g)</th>
+                            <th>총 칼로리 <br> (g)</th>
+                        </tr>
+                        <tr>
+                            <td>190</td>
+                            <td>95</td>
+                            <td>290</td>
+                            <td>520</td>
+                        </tr>
+                        <tr>
+                            <th>총중량 <br> (g)</th>
+                            <th>1회 제공량 <br> (g)</th>
+                            <th>1회 칼로리 <br> (g)</th>
+                            <th>총 칼로리 <br> (g)</th>
+                        </tr>
+                        <tr>
+                            <td>190</td>
+                            <td>95</td>
+                            <td>290</td>
+                            <td>520</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="service-container">
+                <div>
+                    <h2>PB 서비스 우수점</h2>
+                    <div class="more">
+                        <img src="./img/btn_more.png" alt="">
+                    </div>
+                </div>
+            </div>
         </section>
         <aside>
             <div><img src="./img/bn_rwd_01.png" alt=""></div>
@@ -274,6 +433,28 @@
             <div><img src="./img/bn_rwd_03.png" alt=""></div>
         </aside>
     </div>
-    <footer></footer>
+    <footer>
+        <div class="footer-left">
+            <h1>logo <img src="./img/logo_grey.png" alt=""></h1>
+        </div>
+        <div class="footer-right">
+            <div class="footer-info">
+                <ul>
+                    <li><a href="#">개인정보취급방침</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">사이트 맵</a></li>
+                </ul>
+            </div>
+            <address>
+                길동팩토리 대표자 : 박재원 <br>
+                홈페이지 : www.naver.com <br>
+                ;lfasdjopweeviopsdajf;dsjfwpjeksdns;kcnoiiofkaviejf <br>
+            </address>
+        </div>
+    </footer>
 </body>
 </html>
+
+<!-- 
+    https://github.com/ahsor/paris
+ -->
